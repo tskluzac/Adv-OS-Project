@@ -1,0 +1,77 @@
+"""
+extpredict is a feature selection experiment. It takes a file system, reads in
+all files, featurises them somehow and then tries to predict their file extension
+(again somehow).
+"""
+import os
+
+class SystemReader:
+    """
+    Traverses fs, and produces initial dataset for prediction
+    """
+
+    def __init__(self, top_dir, feature_maker):
+        """
+        top_dir - the starting directory, a string
+        feature_maker - an instance of the FileFeature class, where feature
+                        extraction logic is located
+
+        """
+        if not os.path.isdir(top_dir):
+            raise NotADirectoryError("%s is not a valid directory" % top_dir)
+
+        self.dirname = top_dir
+        self.feature = feture_maker
+        self.data = []
+        self.next_dirs = []
+
+    def handle_file(self, filename, current_dir):
+
+        """put a single file's features into the pot """
+        # at some point we may want to parallelize fs traversal, to do that
+        # we could make this a standalone function and use pool.map
+
+        try:
+            with open(os.path.join(current_dir, filename), "r") as open_file:
+
+                extension = get_extension(filename)
+                features = self.feature.get_feature(open_file)
+                self.data.append([current_dir, filename, features, extension])
+
+        except FileNotFoundError, PermissionError as e:
+            pass 
+
+    def parse_dir(self, dirname):
+
+        files = []
+        
+        for name in os.listdir(dirname):
+            if name[0] == ".":
+                continue # exclude hidden files and dirs for time being
+            if os.path.isfile(os.path.join(dirname, name)):
+                files.append(name)
+            elif os.path.isdir(os.path.join(dirname, name)):
+                self.next_dirs.append(os.path.join(dirname, name))
+        
+        for filename in files:
+            self.handle_file(filename, dirname)
+
+    def run(self):
+        """ run extraction on top_dir"""
+        self.next_dirs = [self.top_dir]
+
+        while len(self.next_dirs) > 0:
+
+            dirname = self.next_dirs.pop(0)
+            self.parse_dir(dirname)
+                        
+def get_extension(filename):
+
+    """
+    get the file extension, separate function bc we may want to be smarter about it
+    at some point
+    """
+    if "." not in filename:
+        return "None"
+    else:
+        return filename[filename.rfind("."):]
