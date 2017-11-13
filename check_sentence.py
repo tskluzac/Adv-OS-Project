@@ -154,12 +154,11 @@ def check_wordlist(word_list):
 	return [count_word, count_number]
 
 
-# the main function
 # input: filename, number of words need to sample, 
 # total_decision: number of words/number should be at least more than total_decision, maybe 0.5
 # number_decision: number of number words(911) cannot more than pencent of words + number, maybe 0.8
 # output: is the file contains readable sentence
-def check_sentence_in_word(filename, n, total_decision, number_decision):
+def check_sentence_in_word(filename, n, total_decision, number_decision, debug):
 	if debug:
 		print('working on ' + filename)
 	word_list = get_wordlist(filename, n)
@@ -171,16 +170,17 @@ def check_sentence_in_word(filename, n, total_decision, number_decision):
 	count_total = r[0] + r[1]
 	if count_total == 0:
 		return False
-	print('\n##############################################\n')
-	print(count_total/len(word_list))
-	print(count_number/count_total)
+	if debug:
+		print('\n##############################################\n')
+		print(count_total/len(word_list))
+		print(count_number/count_total)
 	if count_total/len(word_list) < total_decision or count_number/count_total > number_decision:
 		return False
 	else:
 		return True
 
 
-# get all file in a folder
+# get all file in a folder, used for debug
 # input: folderpath
 # flag indicates whether includes files in subfolder, 1 is including, 0 is not
 # reference: https://stackoverflow.com/questions/3207219/how-do-i-list-all-files-of-a-directory
@@ -194,7 +194,20 @@ def file_in_folder(folder_path, flag):
 	return file_list
 
 
-file_list = file_in_folder('C:\\E\\temp', 1)
-#file_list = file_in_folder('C:\\E\\University of Chicago\\CMSC33100\\project', 1);
-for i in file_list:
-	print(i + ': ' + str(check_sentence_in_word(i, 150, 0.5, 0.6)))
+# the main function
+# input: filename
+# n: number of words want to sample
+# total_decision: number of words/number should be at least more than total_decision, maybe 0.5
+# number_decision: number of number words(911) cannot more than pencent of words + number, maybe 0.6
+# output: is the file contains readable sentence
+def check_sentence(file_list, n, total_decision, number_decision, debug):
+	is_sentence = []
+	for i in file_list:
+		is_sentence += [check_sentence_in_word(i, n, total_decision, number_decision, debug)]
+	return is_sentence
+
+
+# file_list = file_in_folder('C:\\E\\temp', 1)
+# #file_list = file_in_folder('C:\\E\\University of Chicago\\CMSC33100\\project', 1);
+# for i in file_list:
+# 	print(i + ': ' + str(check_sentence_in_word(i, 150, 0.5, 0.6)))
