@@ -34,13 +34,13 @@ class SystemReader(object):
         # we could make this a standalone function and use pool.map
 
         try:
-            with open(os.path.join(current_dir, filename), "r") as open_file:
+            with open(os.path.join(current_dir, filename), "rb") as open_file:
 
                 extension = get_extension(filename)
                 features = self.feature.get_feature(open_file)
                 self.data.append([current_dir, filename, features, extension])
 
-        except (FileNotFoundError, PermissionError):
+        except: #(FileNotFoundError, PermissionError):
             pass
 
     def parse_dir(self, dirname):
@@ -66,8 +66,9 @@ class SystemReader(object):
         self.next_dirs = [self.dirname]
 
         while self.next_dirs:
-
+            
             dirname = self.next_dirs.pop(0)
+            print("Scanning %s" % dirname)
             self.parse_dir(dirname)
 
 def get_extension(filename):
