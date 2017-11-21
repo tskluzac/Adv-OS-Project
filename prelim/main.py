@@ -5,9 +5,11 @@ main function for prediction task
 """
 import argparse  
 import numpy as np
+
 from sklearn.svm import SVC
 from headbytes import HeadBytes
 from extpredict import SystemReader
+from classify import ClassifierBuilder
 
 def main():
 
@@ -20,26 +22,9 @@ def main():
      
     reader.run()
 
-    class_table = {}
-    X_list = []
-    Y_list = []
-
-    for entry in reader.data:
-
-        x = entry[2]
-        X_list.append([int.from_bytes(c, byteorder="big") for c in x])
-
-        try:
-            y = class_table[entry[-1]]
-        except KeyError:
-            class_table[entry[-1]] = len(class_table)+1
-            y = class_table[entry[-1]]
-        Y_list.append(y)
-
-    clf = SVC()
-    clf.fit(np.array(X_list), np.array(Y_list))
-
-    print(clf.score(X_list, Y_list))
+    classifier = ClassifierBuilder(reader, classifier="svc")
+    classifier.train()
+    print("SVC classification using %s is %f" % (features.name, classifier.test()))
 
 if __name__ == '__main__':
     main()
