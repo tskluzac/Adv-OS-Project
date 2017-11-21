@@ -18,7 +18,7 @@ class HeadBytes(FeatureMaker):
         byte = open_file.read(1) 
         read = 1  
         head = [] 
-        print(type(byte))
+
         while byte and read < self.head_size:
 
             head.append(byte)
