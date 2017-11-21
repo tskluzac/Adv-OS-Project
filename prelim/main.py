@@ -21,8 +21,10 @@ def main():
     reader = SystemReader(args.dirname, features)
      
     reader.run()
-
-    classifier = ClassifierBuilder(reader, classifier="svc")
+    print("Directory scanned, found %i samples" % len(reader.data))
+    classifier = ClassifierBuilder(reader, classifier="svc",split=0.5)
+    print("Training classifier on %i samples with %i classes" % 
+           (classifier.X_train.shape[0], len(features.class_table)))
     classifier.train()
     print("SVC classification using %s is %f" % (features.name, classifier.test()))
 
