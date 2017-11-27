@@ -5,6 +5,7 @@ main function for prediction task
 """
 import argparse  
 import csv
+import time
 
 from headbytes import HeadBytes
 from extpredict import SystemReader
@@ -59,17 +60,22 @@ def experiment(reader, classifier, outfile, trials=10):
     classifier - a string specifying the classifier type (svc, logit, etc.)
     outfile - string with filename of output file
     """
-
+    
+    read_start_time = time.time()
     reader.run()
+    read_time = time.time() - read_start_time
+
     classifier = ClassifierBuilder(reader, classifier=classifier)
 
     for i in range(trials):
 
+        classifier_start = time.time()
         classifier.train() 
         accuracy = classifier.test()
+        classifier_time = time.time() - classifier_start
 
         with open(outfile, "a") as data_file:
-            data_file.write(str(accuracy)+"\n")
+            data_file.write(str(accuracy)+","+str(read_time)+","+str(classifier_time)+"\n")
 
         if i != trials-1:
             classifier.shuffle()
