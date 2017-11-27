@@ -40,7 +40,7 @@ class SystemReader(object):
                 features = self.feature.get_feature(open_file)
                 self.data.append([current_dir, filename, features, extension])
 
-        except: #(FileNotFoundError, PermissionError):
+        except (FileNotFoundError, PermissionError):
             pass
 
     def parse_dir(self, dirname):
