@@ -24,6 +24,7 @@ def main():
                         help="classifier to use, (svc|logit|rf)")
     parser.add_argument("feature", type=str,
                         help="feature to use, (head|rand|randhead|ngram)")
+    parser.add_argument("--split", type=float, default=0.8,help="test/train split ratio",dest="split")
     parser.add_argument("--out", type=str, default="out.csv", dest="outfile",
                         help="file to write out results to")
     parser.add_argument("--head-bytes", type=int, default=512,dest="head_bytes",
@@ -51,9 +52,9 @@ def main():
         return
 
     reader = SystemReader(args.dirname, features)
-    experiment(reader, args.classifier, args.outfile, trials=args.n) 
+    experiment(reader, args.classifier, args.outfile, args.n, split=args.split) 
     
-def experiment(reader, classifier, outfile, trials=10):
+def experiment(reader, classifier, outfile, trials, split):
 
     """
     reader - System reader with feature already set
@@ -65,7 +66,7 @@ def experiment(reader, classifier, outfile, trials=10):
     reader.run()
     read_time = time.time() - read_start_time
 
-    classifier = ClassifierBuilder(reader, classifier=classifier)
+    classifier = ClassifierBuilder(reader, classifier=classifier, split=split)
 
     for i in range(trials):
 
@@ -75,7 +76,8 @@ def experiment(reader, classifier, outfile, trials=10):
         classifier_time = time.time() - classifier_start
 
         with open(outfile, "a") as data_file:
-            data_file.write(str(accuracy)+","+str(read_time)+","+str(classifier_time)+"\n")
+            data_file.write(str(accuracy)+","+str(read_time)+","+str(classifier_time)+\
+		            reader.feature.name+","+classifier+"\n")
 
         if i != trials-1:
             classifier.shuffle()
