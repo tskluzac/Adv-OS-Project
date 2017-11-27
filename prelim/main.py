@@ -54,7 +54,7 @@ def main():
     reader = SystemReader(args.dirname, features)
     experiment(reader, args.classifier, args.outfile, args.n, split=args.split) 
     
-def experiment(reader, classifier, outfile, trials, split):
+def experiment(reader, classifier_name, outfile, trials, split):
 
     """
     reader - System reader with feature already set
@@ -66,7 +66,7 @@ def experiment(reader, classifier, outfile, trials, split):
     reader.run()
     read_time = time.time() - read_start_time
 
-    classifier = ClassifierBuilder(reader, classifier=classifier, split=split)
+    classifier = ClassifierBuilder(reader, classifier=classifier_name, split=split)
 
     for i in range(trials):
 
@@ -77,7 +77,7 @@ def experiment(reader, classifier, outfile, trials, split):
 
         with open(outfile, "a") as data_file:
             data_file.write(str(accuracy)+","+str(read_time)+","+str(classifier_time)+\
-		            reader.feature.name+","+classifier+"\n")
+		            reader.feature.name+","+classifier_name+"\n")
 
         if i != trials-1:
             classifier.shuffle()
