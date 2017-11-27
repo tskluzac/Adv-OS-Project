@@ -68,7 +68,6 @@ class SystemReader(object):
         while self.next_dirs:
             
             dirname = self.next_dirs.pop(0)
-            print("Scanning %s" % dirname)
             self.parse_dir(dirname)
 
 def get_extension(filename):
