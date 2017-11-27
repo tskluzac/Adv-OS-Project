@@ -1,5 +1,6 @@
 import numpy as np
 from feature import FeatureMaker
+from itertools import product
 
 class Ngram(FeatureMaker):
 
@@ -9,13 +10,13 @@ class Ngram(FeatureMaker):
         """
 
         self.name = "ngram"
-        self.nfeatures = 256 ** n
+        self.nfeatures = 257 ** n
         self.n = n
         self.class_table = {}
 
         self.sequence_table = {}
 
-        for seq in product(range(256), repeat=n):
+        for seq in product([a.to_bytes(1, "big") for a in range(256)]+[b''], repeat=n):
             self.sequence_table[seq] = len(self.sequence_table)
         assert len(self.sequence_table) == self.nfeatures
 
@@ -27,11 +28,11 @@ class Ngram(FeatureMaker):
         
         while seq[0]:
 
+            # problem is empty byte string
             feature[self.sequence_table[seq]] += 1
-            
             new_seq = [b for b in seq[1:]]
             new_seq.append(open_file.read(1))
-            
+           
             seq = tuple(new_seq)
 
         return feature

@@ -2,6 +2,8 @@ import numpy as np
 
 from os.path import getsize
 from feature import FeatureMaker
+from random import randint
+from headbytes import HeadBytes
 
 class RandHead(FeatureMaker):
     """
@@ -22,9 +24,16 @@ class RandHead(FeatureMaker):
         head = self._head.get_feature(open_file)
         
         size = getsize(open_file.name)
-        rand_index = [randint(self.head_size, size-1) for _ in range(self.rand_size)]
 
-        sort(rand_index)
+        if size == 0:
+            raise FileNotFoundError()
+
+        if size > self.head_size:
+            rand_index = [randint(self.head_size, size-1) for _ in range(self.rand_size)]
+        else: # possibly the right way??
+            rand_index = [randint(0, size-1) for _ in range(self.rand_size)]
+
+        rand_index.sort()
         sample_bytes = head
 
         for index in rand_index:
