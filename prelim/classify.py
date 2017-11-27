@@ -65,7 +65,12 @@ class ClassifierBuilder(object):
         elif self.classifier_type == "logit":
             self.model = LogisticRegression()
         elif self.classifier_type == "rf":
-            self.model = RandomForestClassifier()
+            #self.model = RandomForestClassifier()
+            self.model = RandomForestClassifier(n_estimators=15,
+                                                max_depth = 4000, #Shouldn't overfit with only few trees
+                                                min_samples_split=3
+                                                #oob_score=true, # will be slower
+                                                )
 
         self.model.fit(self.X_train, self.Y_train)
 
