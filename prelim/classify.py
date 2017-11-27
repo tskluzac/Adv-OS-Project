@@ -27,6 +27,7 @@ class ClassifierBuilder(object):
         """
         self.classifier_type = classifier
         self.model = None
+        self.split = split
 
         # randomly partition data, add method to shuffle w/in classifier
         # so we don't need to translate multiple times after this.
@@ -75,3 +76,24 @@ class ClassifierBuilder(object):
         """
 
         return self.model.score(self.X_test, self.Y_test)
+
+    def shuffle(self, split=None):
+
+        if split is None:
+            split = self.split
+   
+        old_X = np.concatenate((self.X_train, self.X_test), axis=0)
+        old_Y = np.concatenate((self.Y_train, self.Y_test), axis=0)
+        
+        perm = np.random.permutation(old_Y.shape[0])
+
+        X = old_X[perm]
+        Y = old_Y[perm]
+
+        split_index = int(split*X.shape[0])
+
+        self.X_train = X[:split_index]
+        self.Y_train = Y[:split_index]
+
+        self.X_test = X[split_index:]
+        self.Y_test = Y[split_index:]

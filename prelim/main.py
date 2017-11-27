@@ -4,27 +4,75 @@
 main function for prediction task
 """
 import argparse  
-import numpy as np
+import csv
 
-from sklearn.svm import SVC
 from headbytes import HeadBytes
 from extpredict import SystemReader
 from classify import ClassifierBuilder
+from randbytes import RandBytes
+from randhead import RandHead
+from ngram import Ngram
 
 def main():
 
-    parser = argparse.ArgumentParser(description='Run file classification')
-    parser.add_argument("dirname", type=str)
-    args = parser.parse_args()
- 
-    features = HeadBytes() # the features for this test
-    reader = SystemReader(args.dirname, features)
-     
-    reader.run()
+    parser = argparse.ArgumentParser(description='Run file classification experiments')
 
-    classifier = ClassifierBuilder(reader, classifier="svc")
-    classifier.train()
-    print("SVC classification using %s is %f" % (features.name, classifier.test()))
+    parser.add_argument("dirname", type=str)
+    parser.add_argument("--n", type=int, default=10, help="number of trials",dest="n")
+    parser.add_argument("classifier", type=str,
+                        help="classifier to use, (svc|logit|rf)")
+    parser.add_argument("feature", type=str,
+                        help="feature to use, (head|rand|randhead|ngram)")
+    parser.add_argument("--out", type=str, default="out.csv", dest="outfile",
+                        help="file to write out results to")
+    parser.add_argument("--head-bytes", type=int, default=512,dest="head_bytes",
+                        help="size of file head in bytes, default 512, used for head and randhead")
+    parser.add_argument("--rand-bytes",type=int, default=512,dest="rand_bytes",
+                        help="number of random bytes, default 512, used in rand and randhead")
+    parser.add_argument("--ngram",type=int, dest="ngram", default=1,help="n for the ngram")
+ 
+    args = parser.parse_args()
+    
+    if args.classifier not in ["svc","logit","rf"]:
+        print("Invalid classifier option %s" % args.classifier)
+        return
+
+    if args.feature == "head":
+        features = HeadBytes(head_size=args.head_bytes)
+    elif args.feature == "rand":
+        features = RandBytes(number_bytes=args.rand_bytes)
+    elif args.feature == "randhead":
+        features = RandHead(head_size=args.head_bytes,rand_size=args.rand_bytes)
+    elif args.feature == "ngram":
+        features = Ngram(args.ngram) 
+    else:
+        print("Invalid feature option %s" % args.feature)
+        return
+
+    reader = SystemReader(args.dirname, features)
+    experiment(reader, args.classifier, args.outfile, trials=args.n) 
+    
+def experiment(reader, classifier, outfile, trials=10):
+
+    """
+    reader - System reader with feature already set
+    classifier - a string specifying the classifier type (svc, logit, etc.)
+    outfile - string with filename of output file
+    """
+
+    reader.run()
+    classifier = ClassifierBuilder(reader, classifier=classifier)
+
+    for i in range(trials):
+
+        classifier.train() 
+        accuracy = classifier.test()
+
+        with open(outfile, "a") as data_file:
+            data_file.write(str(accuracy)+"\n")
+
+        if i != trials-1:
+            classifier.shuffle()
 
 if __name__ == '__main__':
     main()
