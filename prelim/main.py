@@ -77,7 +77,7 @@ def experiment(reader, classifier_name, outfile, trials, split):
 
         with open(outfile, "a") as data_file:
             data_file.write(str(accuracy)+","+str(read_time)+","+str(classifier_time)+\
-		            reader.feature.name+","+classifier_name+"\n")
+		            ","+reader.feature.name+","+classifier_name+"\n")
 
         if i != trials-1:
             classifier.shuffle()
