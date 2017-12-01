@@ -67,8 +67,12 @@ def experiment(reader, classifier_name, outfile, trials, split):
     read_time = time.time() - read_start_time
 
     classifier = ClassifierBuilder(reader, classifier=classifier_name, split=split)
+   
+    # with open(outfile, "w") as f:
+        #f.close()
 
     for i in range(trials):
+        print("Running", i, "/", trials, "th trial")
 
         classifier_start = time.time()
         classifier.train() 

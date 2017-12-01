@@ -9,9 +9,15 @@ import os
 # flag indicates whether includes files in subfolder, 1 is including, 0 is not
 # reference: https://stackoverflow.com/questions/3207219/how-do-i-list-all-files-of-a-directory
 def file_in_folder(folder_path, flag):
+	#print('in file_in_folder')
+	#print(os.chdir(folder_path))
+	#print(os.walk(folder_path))
 	file_list = []
 	for (dirpath, dirnames, filenames) in os.walk(folder_path):
+		#print(dirpath)
+		#print(filenames)
 		for i in filenames:
+			# print(i)
 			file_list += [dirpath + os.sep + i]
 		if flag == 0:
 			break;
@@ -27,14 +33,18 @@ def file_in_folder(folder_path, flag):
 # output: a list of list, one column corresponding to one file
 def get_metadata(folder_path, flag, n, total_decision, number_decision, debug):
 	file_list = file_in_folder(folder_path, flag)
+	# print(file_list)
 	metadata = []
 	metadata += [get_extension.file_extension(file_list)]
 	metadata += [get_size.file_size_list(file_list)]
 	metadata += [check_sentence.check_sentence(file_list, n, total_decision, number_decision, debug)]
 	print('\n')
 	print(metadata)
+	return metadata
 
 
 #file_list = file_in_folder('C:\\E\\temp', 1)
-file_list = file_in_folder('C:\\E\\University of Chicago\\CMSC33100\\project', 1)
-get_metadata('C:\\E\\University of Chicago\\CMSC33100\\project', 1, 150, 0.5, 0.6, 0)
+#file_list = file_in_folder('C:\\E\\University of Chicago\\CMSC33100\\project', 1)
+#get_metadata('C:\\E\\University of Chicago\\CMSC33100\\project', 1, 150, 0.5, 0.6, 0)
+#file_list = file_in_folder("/home/tskluzac/pub8/", 1)
+#print(file_list)
