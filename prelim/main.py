@@ -13,6 +13,7 @@ from classify import ClassifierBuilder
 from randbytes import RandBytes
 from randhead import RandHead
 from ngram import Ngram
+from randngram import RandNgram
 
 def main():
 
@@ -23,14 +24,14 @@ def main():
     parser.add_argument("classifier", type=str,
                         help="classifier to use, (svc|logit|rf)")
     parser.add_argument("feature", type=str,
-                        help="feature to use, (head|rand|randhead|ngram)")
+                        help="feature to use, (head|rand|randhead|ngram|randngram)")
     parser.add_argument("--split", type=float, default=0.8,help="test/train split ratio",dest="split")
     parser.add_argument("--out", type=str, default="out.csv", dest="outfile",
                         help="file to write out results to")
     parser.add_argument("--head-bytes", type=int, default=512,dest="head_bytes",
                         help="size of file head in bytes, default 512, used for head and randhead")
     parser.add_argument("--rand-bytes",type=int, default=512,dest="rand_bytes",
-                        help="number of random bytes, default 512, used in rand and randhead")
+                        help="number of random bytes, default 512, used in rand, randhead, and randngram")
     parser.add_argument("--ngram",type=int, dest="ngram", default=1,help="n for the ngram")
  
     args = parser.parse_args()
@@ -46,7 +47,9 @@ def main():
     elif args.feature == "randhead":
         features = RandHead(head_size=args.head_bytes,rand_size=args.rand_bytes)
     elif args.feature == "ngram":
-        features = Ngram(args.ngram) 
+        features = Ngram(args.ngram)
+    elif args.feature == "randngram":
+        features = RandNgram(args.ngram, args.rand_bytes)
     else:
         print("Invalid feature option %s" % args.feature)
         return
