@@ -50,7 +50,7 @@ def split_sentence(line):
 	length = len(line) - 1
 	i = -1;
 	result = []
-	old_result = re.split('\s', line)
+	old_result = re.split(',|\s', line)
 	#print(result)
 	for i in old_result: # remove empty strings
 		if i != '':
@@ -127,6 +127,8 @@ def get_wordlist(filename, n):
 			line = re_line.decode('utf-8')
 			word_list = split_sentence(line)
 			if debug:
+				# if filename.lower().endswith(('.csv')):
+				# 	print(line)
 				print(word_list)
 			fp.close()
 		try:
@@ -168,16 +170,25 @@ def check_sentence_in_word(filename, n, total_decision, number_decision, debug):
 	count_word = r[0]
 	count_number = r[1]
 	count_total = r[0] + r[1]
-	if count_total == 0:
+	if count_total == 0 and debug:
+		print('no word or number')
+		print(False)
+		print('\n##############################################\n')
 		return False
 	if debug:
-		print('\n##############################################\n')
 		print(count_total/len(word_list))
 		print(count_number/count_total)
 	if count_total/len(word_list) < total_decision or count_number/count_total > number_decision:
+		if debug:
+			print(False)
+			print('\n##############################################\n')
 		return False
 	else:
+		if debug:
+			print(True )
+			print('\n##############################################\n')
 		return True
+
 
 
 # get all file in a folder, used for debug
@@ -208,6 +219,7 @@ def check_sentence(file_list, n, total_decision, number_decision, debug):
 
 
 # file_list = file_in_folder('C:\\E\\temp', 1)
+# check_sentence(file_list, 150, 0.5, 0.6, 1)
 # #file_list = file_in_folder('C:\\E\\University of Chicago\\CMSC33100\\project', 1);
 # for i in file_list:
 # 	print(i + ': ' + str(check_sentence_in_word(i, 150, 0.5, 0.6)))
