@@ -1,3 +1,5 @@
+# using knn with cross validation.
+
 import numpy as np
 from sklearn.cluster import  k_means
 from sklearn.metrics import accuracy_score 

@@ -1,3 +1,5 @@
+# using kmean and validating with purity.
+
 import numpy as np
 from sklearn.cluster import  k_means
 from sklearn.metrics import accuracy_score 
