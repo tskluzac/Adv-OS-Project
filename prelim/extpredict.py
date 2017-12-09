@@ -102,7 +102,7 @@ class NaiveTruthReader(object):
                         features = self.feature.get_feature(open_file)
                         self.data.append(
                             [os.path.dirname(row["path"]), os.path.basename(row["path"]),
-                            features, row["naive_label"]])
+                            features, row["file_label"]])
                 except (FileNotFoundError, PermissionError):
                     print("Could not open %s" % row["path"])
 def get_extension(filename):
