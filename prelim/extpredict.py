@@ -6,7 +6,7 @@ all files, featurises them somehow and then tries to predict their file extensio
 (again somehow).
 """
 import os
-from pandas import DataFrame
+import csv
 
 class SystemReader(object):
     """
@@ -77,7 +77,7 @@ class NaiveTruthReader(object):
     Traverses fs, and produces initial dataset for prediction
     """
 
-    def __init__(self, feature_maker):
+    def __init__(self, feature_maker, labelfile="naivetruth.csv"):
         """
         top_dir - the starting directory, a string
         feature_maker - an instance of the FileFeature class, where feature
@@ -88,13 +88,23 @@ class NaiveTruthReader(object):
 
         self.feature = feature_maker
         self.data = []
+        self.labelfile=labelfile
 
     def run(self):
-        df = DataFrame.from_csv('naivetruth.csv')
-        self.data = self.data + df['file_label'].values.tolist()
 
+        with open(self.labelfile,"r") as labelf:
 
-
+            reader = csv.DictReader(labelf)
+            
+            for row in reader:
+                try:
+                    with open(row["path"], "rb") as open_file: 
+                        features = self.feature.get_feature(open_file)
+                        self.data.append(
+                            [os.path.dirname(row["path"]), os.path.basename(row["path"]),
+                            features, row["naive_label"]])
+                except (FileNotFoundError, PermissionError):
+                    print("Could not open %s" % row["path"])
 def get_extension(filename):
 
     """
