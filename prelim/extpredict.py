@@ -85,13 +85,13 @@ class NaiveTruthReader(object):
 
         """
 
-        df = DataFrame.from_csv('naivetruth.csv')
 
         self.feature = feature_maker
-        self.data = df['file_label'].values.tolist()
+        self.data = []
 
     def run(self):
-        pass
+        df = DataFrame.from_csv('naivetruth.csv')
+        self.data = self.data + df['file_label'].values.tolist()
 
 
 

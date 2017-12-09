@@ -9,6 +9,7 @@ import time
 
 from headbytes import HeadBytes
 from extpredict import SystemReader
+from extpredict import NaiveTruthReader
 from classify import ClassifierBuilder
 from randbytes import RandBytes
 from randhead import RandHead
@@ -40,6 +41,7 @@ def main():
         print("Invalid classifier option %s" % args.classifier)
         return
 
+    print("Potato")
     if args.feature == "head":
         features = HeadBytes(head_size=args.head_bytes)
     elif args.feature == "rand":
@@ -54,7 +56,8 @@ def main():
         print("Invalid feature option %s" % args.feature)
         return
 
-    reader = SystemReader(args.dirname, features)
+    reader = NaiveTruthReader(features)
+    #reader = SystemReader(args.dirname, features)
     experiment(reader, args.classifier, args.outfile, args.n, split=args.split) 
     
 def experiment(reader, classifier_name, outfile, trials, split):
@@ -88,6 +91,7 @@ def experiment(reader, classifier_name, outfile, trials, split):
 
         if i != trials-1:
             classifier.shuffle()
+
 
 if __name__ == '__main__':
     main()
