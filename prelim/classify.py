@@ -3,6 +3,8 @@ from random import shuffle
 from sklearn.svm import SVC
 from sklearn.linear_model import LogisticRegression
 from sklearn.ensemble import RandomForestClassifier
+from sklearn.neighbors import KNeighborsClassifier
+from jsd import jsd
 
 class ClassifierBuilder(object):
 
@@ -71,7 +73,9 @@ class ClassifierBuilder(object):
                                                 min_samples_split=3
                                                 #oob_score=true, # will be slower
                                                 )
-
+        elif self.classifier_type == "jsd":
+            self.model = KNeighborsClassifier(metric=jsd)
+ 
         self.model.fit(self.X_train, self.Y_train)
 
     def test(self):

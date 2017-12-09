@@ -23,7 +23,7 @@ def main():
     parser.add_argument("dirname", type=str)
     parser.add_argument("--n", type=int, default=10, help="number of trials",dest="n")
     parser.add_argument("classifier", type=str,
-                        help="classifier to use, (svc|logit|rf)")
+                        help="classifier to use, (svc|logit|rf|jsd)")
     parser.add_argument("feature", type=str,
                         help="feature to use, (head|rand|randhead|ngram|randngram)")
     parser.add_argument("--split", type=float, default=0.8,help="test/train split ratio",dest="split")
@@ -37,11 +37,10 @@ def main():
  
     args = parser.parse_args()
     
-    if args.classifier not in ["svc","logit","rf"]:
+    if args.classifier not in ["svc","logit","rf", "jsd"]:
         print("Invalid classifier option %s" % args.classifier)
         return
 
-    print("Potato")
     if args.feature == "head":
         features = HeadBytes(head_size=args.head_bytes)
     elif args.feature == "rand":
@@ -56,8 +55,8 @@ def main():
         print("Invalid feature option %s" % args.feature)
         return
 
-    reader = NaiveTruthReader(features)
-    #reader = SystemReader(args.dirname, features)
+    #reader = NaiveTruthReader(features)
+    reader = SystemReader(args.dirname, features)
     experiment(reader, args.classifier, args.outfile, args.n, split=args.split) 
     
 def experiment(reader, classifier_name, outfile, trials, split):
