@@ -34,6 +34,7 @@ def main():
     parser.add_argument("--rand-bytes",type=int, default=512,dest="rand_bytes",
                         help="number of random bytes, default 512, used in rand, randhead, and randngram")
     parser.add_argument("--ngram",type=int, dest="ngram", default=1,help="n for the ngram")
+    parser.add_argument("--reader", type=str, dest="reader",default=None,help="Labelled data filename")
  
     args = parser.parse_args()
     
@@ -54,9 +55,10 @@ def main():
     else:
         print("Invalid feature option %s" % args.feature)
         return
-
-    #reader = NaiveTruthReader(features)
-    reader = SystemReader(args.dirname, features)
+    if args.reader is not None:
+        reader = NaiveTruthReader(features, labelfile=args.reader)
+    else:
+        reader = SystemReader(args.dirname, features)
     experiment(reader, args.classifier, args.outfile, args.n, split=args.split) 
     
 def experiment(reader, classifier_name, outfile, trials, split):
@@ -77,7 +79,7 @@ def experiment(reader, classifier_name, outfile, trials, split):
         #f.close()
 
     for i in range(trials):
-        print("Running", i, "/", trials, "th trial")
+    #    print("Running", i, "/", trials, "th trial")
 
         classifier_start = time.time()
         classifier.train() 
