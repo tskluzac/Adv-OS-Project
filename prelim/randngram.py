@@ -16,7 +16,7 @@ class RandNgram(FeatureMaker):
         self.sequence_table = {}
 
         self.sequence_table = [0 for _ in range(257 ** n)]
-        print(self.sequence_table, len(self.sequence_table))
+        #print(self.sequence_table, len(self.sequence_table))
         #for seq in product([a.to_bytes(1, "big") for a in range(256)]+[b''], repeat=n):
         #    self.sequence_table[seq] = len(self.sequence_table)
 
@@ -53,7 +53,7 @@ class RandNgram(FeatureMaker):
                 seq *= 257
                 if (len(cur) > 0):
                     seq += ord(cur)
-                print(cur, seq)
+                #print(cur, seq)
             feature[seq] += 1 / self.k
 
         return feature
