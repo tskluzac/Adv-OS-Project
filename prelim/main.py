@@ -69,9 +69,11 @@ def experiment(reader, classifier_name, outfile, trials, split):
     outfile - string with filename of output file
     """
     
+    print("Reading")
     read_start_time = time.time()
     reader.run()
     read_time = time.time() - read_start_time
+    print("Done reading", read_time)
 
     classifier = ClassifierBuilder(reader, classifier=classifier_name, split=split)
    
@@ -79,12 +81,16 @@ def experiment(reader, classifier_name, outfile, trials, split):
         #f.close()
 
     for i in range(trials):
-    #    print("Running", i, "/", trials, "th trial")
+        print("Running", i, "/", trials, "th trial")
 
+        print("Training")
         classifier_start = time.time()
         classifier.train() 
+        print("Done training", time.time() - classifier_start)
+        print("Testing")
         accuracy = classifier.test()
         classifier_time = time.time() - classifier_start
+        print("Done testing", classifier_time)
 
         with open(outfile, "a") as data_file:
             data_file.write(str(accuracy)+","+str(read_time)+","+str(classifier_time)+\
