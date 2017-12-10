@@ -1,0 +1,131 @@
+Running svc experiments with ground truth
+Could not open /home/tskluzac/pub8/oceans/CARINA/S.JohnsonI/README
+Could not open /home/tskluzac/pub8/oceans/McArthurII/README
+Could not open /home/tskluzac/pub8/oceans/SOCCOM/096U20160314/Hydrochem_data/.gmtcommands4
+Could not open /home/tskluzac/pub8/oceans/David_Starr/README
+Could not open /home/tskluzac/pub8/oceans/David_Starr/README~
+Could not open /home/tskluzac/pub8/oceans/ryofumaru10jap/README~
+Could not open /home/tskluzac/pub8/Hydrochem_data/.gmtcommands4
+Could not open /home/tskluzac/pub8/oceans/CARINA/S.JohnsonI/README
+Could not open /home/tskluzac/pub8/oceans/McArthurII/README
+Could not open /home/tskluzac/pub8/oceans/SOCCOM/096U20160314/Hydrochem_data/.gmtcommands4
+Could not open /home/tskluzac/pub8/oceans/David_Starr/README
+Could not open /home/tskluzac/pub8/oceans/David_Starr/README~
+Could not open /home/tskluzac/pub8/oceans/ryofumaru10jap/README~
+Could not open /home/tskluzac/pub8/Hydrochem_data/.gmtcommands4
+Running logit experiments ground truth
+Running jsd experiments with file data/extension
+Running jsd experiments with ground truth
+Running jsd experiments with ground truth  - n = 2
+Could not open /home/tskluzac/pub8/oceans/CARINA/S.JohnsonI/README
+Could not open /home/tskluzac/pub8/oceans/McArthurII/README
+Could not open /home/tskluzac/pub8/oceans/SOCCOM/096U20160314/Hydrochem_data/.gmtcommands4
+Could not open /home/tskluzac/pub8/oceans/David_Starr/README
+Could not open /home/tskluzac/pub8/oceans/David_Starr/README~
+Could not open /home/tskluzac/pub8/oceans/ryofumaru10jap/README~
+Could not open /home/tskluzac/pub8/Hydrochem_data/.gmtcommands4
+usage: main.py [-h] [--n N] [--split SPLIT] [--out OUTFILE]
+               [--head-bytes HEAD_BYTES] [--rand-bytes RAND_BYTES]
+               [--ngram NGRAM] [--reader READER]
+               dirname classifier feature
+main.py: error: unrecognized arguments: data/gt2gram128.csv
+Could not open /home/tskluzac/pub8/oceans/CARINA/S.JohnsonI/README
+Could not open /home/tskluzac/pub8/oceans/McArthurII/README
+Could not open /home/tskluzac/pub8/oceans/SOCCOM/096U20160314/Hydrochem_data/.gmtcommands4
+Could not open /home/tskluzac/pub8/oceans/David_Starr/README
+Could not open /home/tskluzac/pub8/oceans/David_Starr/README~
+Could not open /home/tskluzac/pub8/oceans/ryofumaru10jap/README~
+Could not open /home/tskluzac/pub8/Hydrochem_data/.gmtcommands4
+jsd_gt2_experiments.sh: line 2: 16689 Terminated              python3 main.py /home/tskluzac/pub8/ jsd randngram --ngram 2 --rand-bytes 256 --out data/gt2gram256.csv --reader naivetruth.csv
+jsd_gt2_experiments.sh: line 3: 25373 Terminated              python3 main.py /home/tskluzac/pub8/ jsd randngram --ngram 2 --rand-bytes 512 --out data/gt2gram512.csv --reader naivetruth.csv
+jsd_gt2_experiments.sh: line 4: 25397 Terminated              python3 main.py /home/tskluzac/pub8/ jsd randngram --ngram 2 --rand-bytes 1024 --out data/gt2gram1024.csv --reader naivetruth.csv
+Could not open /home/tskluzac/pub8/oceans/CARINA/S.JohnsonI/README
+Could not open /home/tskluzac/pub8/oceans/McArthurII/README
+Could not open /home/tskluzac/pub8/oceans/SOCCOM/096U20160314/Hydrochem_data/.gmtcommands4
+Could not open /home/tskluzac/pub8/oceans/David_Starr/README
+Could not open /home/tskluzac/pub8/oceans/David_Starr/README~
+Could not open /home/tskluzac/pub8/oceans/ryofumaru10jap/README~
+Could not open /home/tskluzac/pub8/Hydrochem_data/.gmtcommands4
+Running rf experiments ground truth
+Could not open /home/tskluzac/pub8/oceans/CARINA/S.JohnsonI/README
+Could not open /home/tskluzac/pub8/oceans/McArthurII/README
+Could not open /home/tskluzac/pub8/oceans/SOCCOM/096U20160314/Hydrochem_data/.gmtcommands4
+Could not open /home/tskluzac/pub8/oceans/David_Starr/README
+Could not open /home/tskluzac/pub8/oceans/David_Starr/README~
+Could not open /home/tskluzac/pub8/oceans/ryofumaru10jap/README~
+Could not open /home/tskluzac/pub8/Hydrochem_data/.gmtcommands4
+Could not open /home/tskluzac/pub8/oceans/CARINA/S.JohnsonI/README
+Could not open /home/tskluzac/pub8/oceans/McArthurII/README
+Could not open /home/tskluzac/pub8/oceans/SOCCOM/096U20160314/Hydrochem_data/.gmtcommands4
+Could not open /home/tskluzac/pub8/oceans/David_Starr/README
+Could not open /home/tskluzac/pub8/oceans/David_Starr/README~
+Could not open /home/tskluzac/pub8/oceans/ryofumaru10jap/README~
+Could not open /home/tskluzac/pub8/Hydrochem_data/.gmtcommands4
+Could not open /home/tskluzac/pub8/oceans/CARINA/S.JohnsonI/README
+Could not open /home/tskluzac/pub8/oceans/McArthurII/README
+Could not open /home/tskluzac/pub8/oceans/SOCCOM/096U20160314/Hydrochem_data/.gmtcommands4
+Could not open /home/tskluzac/pub8/oceans/David_Starr/README
+Could not open /home/tskluzac/pub8/oceans/David_Starr/README~
+Could not open /home/tskluzac/pub8/oceans/ryofumaru10jap/README~
+Could not open /home/tskluzac/pub8/Hydrochem_data/.gmtcommands4
+Running jsd experiments with file data/extension
+Could not open /home/tskluzac/pub8/oceans/CARINA/S.JohnsonI/README
+Could not open /home/tskluzac/pub8/oceans/McArthurII/README
+Could not open /home/tskluzac/pub8/oceans/SOCCOM/096U20160314/Hydrochem_data/.gmtcommands4
+Could not open /home/tskluzac/pub8/oceans/David_Starr/README
+Could not open /home/tskluzac/pub8/oceans/David_Starr/README~
+Could not open /home/tskluzac/pub8/oceans/ryofumaru10jap/README~
+Could not open /home/tskluzac/pub8/Hydrochem_data/.gmtcommands4
+Could not open /home/tskluzac/pub8/oceans/CARINA/S.JohnsonI/README
+Could not open /home/tskluzac/pub8/oceans/McArthurII/README
+Could not open /home/tskluzac/pub8/oceans/SOCCOM/096U20160314/Hydrochem_data/.gmtcommands4
+Could not open /home/tskluzac/pub8/oceans/David_Starr/README
+Could not open /home/tskluzac/pub8/oceans/David_Starr/README~
+Could not open /home/tskluzac/pub8/oceans/ryofumaru10jap/README~
+Could not open /home/tskluzac/pub8/Hydrochem_data/.gmtcommands4
+jsd_experiments.sh: line 8: 26427 Terminated              python3 main.py /home/tskluzac/pub8/ jsd randngram --ngram 2 --rand-bytes 256 --out data/ext2gram256.csv
+jsd_experiments.sh: line 9: 29359 Terminated              python3 main.py /home/tskluzac/pub8/ jsd randngram --ngram 2 --rand-bytes 512 --out data/ext2gram512.csv
+jsd_experiments.sh: line 10: 29383 Terminated              python3 main.py /home/tskluzac/pub8/ jsd randngram --ngram 2 --rand-bytes 1024 --out data/ext2gram1024.csv
+Running jsd experiments with ground truth
+Could not open /home/tskluzac/pub8/oceans/CARINA/S.JohnsonI/README
+Could not open /home/tskluzac/pub8/oceans/McArthurII/README
+Could not open /home/tskluzac/pub8/oceans/SOCCOM/096U20160314/Hydrochem_data/.gmtcommands4
+Could not open /home/tskluzac/pub8/oceans/David_Starr/README
+Could not open /home/tskluzac/pub8/oceans/David_Starr/README~
+Could not open /home/tskluzac/pub8/oceans/ryofumaru10jap/README~
+Could not open /home/tskluzac/pub8/Hydrochem_data/.gmtcommands4
+Could not open /home/tskluzac/pub8/oceans/CARINA/S.JohnsonI/README
+Could not open /home/tskluzac/pub8/oceans/McArthurII/README
+Could not open /home/tskluzac/pub8/oceans/SOCCOM/096U20160314/Hydrochem_data/.gmtcommands4
+Could not open /home/tskluzac/pub8/oceans/David_Starr/README
+Could not open /home/tskluzac/pub8/oceans/David_Starr/README~
+Could not open /home/tskluzac/pub8/oceans/ryofumaru10jap/README~
+Could not open /home/tskluzac/pub8/Hydrochem_data/.gmtcommands4
+Could not open /home/tskluzac/pub8/oceans/CARINA/S.JohnsonI/README
+Could not open /home/tskluzac/pub8/oceans/McArthurII/README
+Could not open /home/tskluzac/pub8/oceans/SOCCOM/096U20160314/Hydrochem_data/.gmtcommands4
+Could not open /home/tskluzac/pub8/oceans/David_Starr/README
+Could not open /home/tskluzac/pub8/oceans/David_Starr/README~
+Could not open /home/tskluzac/pub8/oceans/ryofumaru10jap/README~
+Could not open /home/tskluzac/pub8/Hydrochem_data/.gmtcommands4
+Could not open /home/tskluzac/pub8/oceans/CARINA/S.JohnsonI/README
+Could not open /home/tskluzac/pub8/oceans/McArthurII/README
+Could not open /home/tskluzac/pub8/oceans/SOCCOM/096U20160314/Hydrochem_data/.gmtcommands4
+Could not open /home/tskluzac/pub8/oceans/David_Starr/README
+Could not open /home/tskluzac/pub8/oceans/David_Starr/README~
+Could not open /home/tskluzac/pub8/oceans/ryofumaru10jap/README~
+Could not open /home/tskluzac/pub8/Hydrochem_data/.gmtcommands4
+run_experiments.sh: line 23:  9636 Terminated              python3 main.py /home/tskluzac/pub8/ jsd randngram --ngram 2 --rand-bytes 256 --out data/ext2gram256.csv
+jsd_gt_experiments.sh: line 16:  9238 Terminated              python3 main.py /home/tskluzac/pub8/ jsd randngram --ngram 2 --rand-bytes 256 --out data/gt2gram256.csv --reader naivetruth.csv
+run_experiments.sh: line 24: 21338 Terminated              python3 main.py /home/tskluzac/pub8/ jsd randngram --ngram 2 --rand-bytes 512 --out data/ext2gram512.csv
+run_experiments.sh: line 25: 21386 Terminated              python3 main.py /home/tskluzac/pub8/ jsd randngram --ngram 2 --rand-bytes 1024 --out data/ext2gram1024.csv
+Running jsd experiments with ground truth
+jsd_gt_experiments.sh: line 17: 21362 Terminated              python3 main.py /home/tskluzac/pub8/ jsd randngram --ngram 2 --rand-bytes 512 --out data/gt2gram512.csv --reader naivetruth.csv
+jsd_gt_experiments.sh: line 18: 21434 Terminated              python3 main.py /home/tskluzac/pub8/ jsd randngram --ngram 2 --rand-bytes 1024 --out data/gt2gram1024.csv --reader naivetruth.csv
+Could not open /home/tskluzac/pub8/oceans/CARINA/S.JohnsonI/README
+Could not open /home/tskluzac/pub8/oceans/McArthurII/README
+Could not open /home/tskluzac/pub8/oceans/SOCCOM/096U20160314/Hydrochem_data/.gmtcommands4
+Could not open /home/tskluzac/pub8/oceans/David_Starr/README
+Could not open /home/tskluzac/pub8/oceans/David_Starr/README~
+Could not open /home/tskluzac/pub8/oceans/ryofumaru10jap/README~
+Could not open /home/tskluzac/pub8/Hydrochem_data/.gmtcommands4
