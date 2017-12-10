@@ -11,8 +11,9 @@ def jsd(p, q):
     Taken from https://stackoverflow.com/questions/15880133/jensen-shannon-divergence/27432724
     """
 
-    norm_p = p/norm(p, ord=1)
-    norm_q = q/norm(q, ord=1)
+    # Uncommenting this out provided p, q are distributions
+    #norm_p = p/norm(p, ord=1)
+    #norm_q = q/norm(q, ord=1)
     m = 0.5*(p+q)
     return 0.5*(entropy(p,m) + entropy(q,m))
 

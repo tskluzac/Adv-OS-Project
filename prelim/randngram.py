@@ -15,8 +15,9 @@ class RandNgram(FeatureMaker):
         self.k = k
         self.sequence_table = {}
 
-        for seq in product([a.to_bytes(1, "big") for a in range(256)]+[b''], repeat=n):
-            self.sequence_table[seq] = len(self.sequence_table)
+        self.sequence_table = [0 for _ in range(257 ** n)]
+        #for seq in product([a.to_bytes(1, "big") for a in range(256)]+[b''], repeat=n):
+        #    self.sequence_table[seq] = len(self.sequence_table)
 
         self.class_table = {}
 
@@ -28,19 +29,28 @@ class RandNgram(FeatureMaker):
             raise FileNotFoundError()
 
         rand_index = [randint(0, size-(self.n-1)) for _ in range(self.k)]
-        rand_index.sort()
+        #rand_index.sort()
 
-        feature = [0 for _ in self.sequence_table.keys()] 
+        #feature = [0 for _ in self.sequence_table.keys()]
+        feature = [0 for _ in len(self.sequence_table)]
 
         for index in rand_index:
             open_file.seek(index)
 
+            """
             seq = []
 
             for _ in range(self.n):
                 seq.append(open_file.read(1))
 
             feature[self.sequence_table[tuple(seq)]] += 1
+            """
+
+            seq = 0
+            for _ in range(self.n):
+                seq = seq * 257 + ord(open_file.read(1))
+                print(ord(open_file.read(1)), seq)
+            feature[seq] += 1 / self.k
 
         return feature
 
