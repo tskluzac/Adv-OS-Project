@@ -16,6 +16,7 @@ class RandNgram(FeatureMaker):
         self.sequence_table = {}
 
         self.sequence_table = [0 for _ in range(257 ** n)]
+        print(self.sequence_table, len(self.sequence_table))
         #for seq in product([a.to_bytes(1, "big") for a in range(256)]+[b''], repeat=n):
         #    self.sequence_table[seq] = len(self.sequence_table)
 
@@ -32,7 +33,7 @@ class RandNgram(FeatureMaker):
         #rand_index.sort()
 
         #feature = [0 for _ in self.sequence_table.keys()]
-        feature = [0 for _ in len(self.sequence_table)]
+        feature = [0.0 for _ in range(len(self.sequence_table))]
 
         for index in rand_index:
             open_file.seek(index)
@@ -48,8 +49,11 @@ class RandNgram(FeatureMaker):
 
             seq = 0
             for _ in range(self.n):
-                seq = seq * 257 + ord(open_file.read(1))
-                print(ord(open_file.read(1)), seq)
+                cur = open_file.read(1)
+                seq *= 257
+                if (len(cur) > 0):
+                    seq += ord(cur)
+                print(cur, seq)
             feature[seq] += 1 / self.k
 
         return feature
