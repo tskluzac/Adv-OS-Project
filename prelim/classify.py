@@ -84,7 +84,7 @@ class ClassifierBuilder(object):
         evaluate the model on the testing set
         """
 
-        return self.model.score(self.X_test[:20], self.Y_test[:20])
+        return self.model.score(self.X_test, self.Y_test)
 
     def shuffle(self, split=None):
 
