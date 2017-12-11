@@ -9,7 +9,7 @@ class RandNgram(FeatureMaker):
     
     def __init__(self, n, k):
         """randomly sample k ngrams"""
-        self.name = "randngram"
+        self.name = "randngram"+str(n)
         self.nfeatures = 257**n
         self.n = n
         self.k = k
